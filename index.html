@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>汇报网页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <style>
+  @font-face 
+  {  
+    font-family: 'FontAwesome';  
+    src: url('font/1.eot'); /* IE9 Compat Modes */  
+    src: url('font/1.eot') format('embedded-opentype'), /* IE6-IE8 */  
+         url('font/4.woff') format('woff2'), /* Super Modern Browsers */  
+         url('font/4.woff') format('woff'), /* Modern Browsers */  
+         url('font/3.ttf') format('truetype'), /* Safari, Android, iOS */  
+         url('font/2.svg') format('svg'); /* Legacy iOS */  
+    font-weight: normal;  
+    font-style: normal;  
+ }
+
+        .search-box {
+            font-family: FontAwesome;
+            position: fixed; /* 更改为fixed定位 */
+            top: calc(100% - 400px); /* 将搜索框放置在页面底部上方50px的位置，具体距离根据实际需求调整 */
+            left: 50%;
+            transform: translateX(-50%); /* 保持水平居中 */
+            background: #ffffff;
+            height: 40px;
+            border: 10px;
+            border-radius: 40px;
+            padding: 10px;
+            opacity: 1; /* 默认为可见 */
+            transition-duration: 1s; /* 移除过渡延迟时间 */
+        }
+
+        .search-box:hover>.search-txt {
+            width: 240px;
+            padding: 0 6px;
+        }
+
+        .search-box:hover>.search-btn {
+            color: white;
+            background: black;
+        }
+
+        .search-btn {
+            transition: 0.5s;
+            font-family: FontAwesome;
+            font-size: 25px;
+            color: black;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border: 10px;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .search-txt {
+            border: none;
+            background: none;
+            outline: none;
+            float: left;
+            padding: 0;
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            transition: 0.6s;
+            line-height: 40px;
+            width: 0px;
+        }
+
+        .hand-box {
+            font-family: FontAwesome;
+            padding: 350px;
+            font-size: 30px;
+        }
+
+        .handb {
+            transition: 0.5s;
+            font-family: FontAwesome;
+            font-size: 25px;
+            color: white;
+            background-color: black;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border: 10px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .handp {
+            color: white;
+            font-size: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-left: 550px;
+        }
+
+        .handb:hover {
+            color: #ff93ec;
+        }
+
+        .handb:active {
+            animation-duration: 500ms;
+            animation-name: flash;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes flash {
+            50% {
+                transform: scale(1.5);
+            }
+
+            80% {
+                transform: rotate(-60deg);
+            }
+
+            100% {
+                transform: rotate(30deg);
+            }
+            
+            
+        }
+
+        .img {
+            width: 500px;
+            height: 500px;
+            margin-top: 15px;
+            transition-delay: 9999999s;
+            transition-duration: 3s;
+        }
+
+        html:hover .img {
+            width: 80px;
+            height: 80px;
+            margin-top: 0px;
+            transition-delay: 1s;
+            transition-duration: 2s;
+        }
+
+        .p {
+            margin-top: -20px;
+            color: white;
+            font-family: 微软雅黑;
+            font-size: 50px;
+            opacity: 1;
+            transition-delay: 9999s;
+            transition-duration: 3s;
+        }
+
+        html:hover .p {
+            margin-top: 10px;
+            font-size: 0px;
+            opacity: 0;
+            transition-delay: 1s;
+            transition-duration: 2s;
+        }
+
+        html:hover .search-box {
+            opacity: 1;
+            transition-delay: 2.5s;
+            transition-duration: 1s;
+        }
+    </style>
+    <style>
+        /* 添加城市按钮相关的CSS样式 */
+        .city-btn-container 
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 70px;
+            gap: 15px; /* 在按钮间添加间距 */
+            max-width: 800px; /* 设置最大宽度以适应屏幕 */
+            margin: 0 auto; /* 让按钮容器水平居中 */
+        }
+        
+        .city-btn 
+        {
+            font-family: 'FontAwesome';
+            font-size: 18px;
+            color: white; /* 文字颜色保持白色 */
+            background-color: transparent; /* 改为透明背景 */
+            border: 2px solid white; /* 边框颜色保持白色 */
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+    
+        .city-btn:hover 
+        {
+           background-color: rgba(0, 0, 0, 0.5); /* 示例：黑色半透明背景 */
+           color:gold; /* 文字颜色变黑 */
+        }
+    </style>
+    
+</head>
+<body style="overflow: hidden;">
+    <video id="background-video" autoplay loop muted playsinline>
+        <source src="imag/2.mp4" type="video/mp4">
+    </video>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 确保视频在所有元素后面 */
+            object-fit: cover; /* 视频填充整个窗口，保持纵横比 */
+        }
+    </style>
+    <center>
+      
+        <img src="imag/4.png" class="img">
+        <p class="p">全国声环境信息发布平台</p>
+        <div class="search-box">
+            <input class="search-txt" type='text' id='inp' />
+            <input class="search-btn" type='button' id='btn' value='&#xf002' />
+        </div>
+        <div class="city-btn-container">
+            <a href="#" onclick="goToCitySearch('北京')" class="city-btn">&#xf041; 北京</a>
+            <a href="#" onclick="goToCitySearch('上海')" class="city-btn">&#xf041; 上海</a>
+            <a href="#" onclick="goToCitySearch('广州')" class="city-btn">&#xf041; 广州</a>
+            <a href="#" onclick="goToCitySearch('深圳')" class="city-btn">&#xf041; 深圳</a>
+            <a href="#" onclick="goToCitySearch('南京')" class="city-btn">&#xf041; 南京</a>
+            <a href="#" onclick="goToCitySearch('桂林')" class="city-btn">&#xf041; 桂林</a>
+            <a href="#" onclick="goToCitySearch('天津')" class="city-btn">&#xf041; 天津</a>
+            <a href="#" onclick="goToCitySearch('杭州')" class="city-btn">&#xf041; 杭州</a>
+            <a href="#" onclick="goToCitySearch('苏州')" class="city-btn">&#xf041; 苏州</a>
+            <a href="#" onclick="goToCitySearch('拉萨')" class="city-btn">&#xf041; 拉萨</a>
+            <a href="#" onclick="goToCitySearch('呼和浩特')" class="city-btn">&#xf041; 呼和浩特</a>
+            <a href="#" onclick="goToCitySearch('成都')" class="city-btn">&#xf041; 成都</a>
+            <a href="#" onclick="goToCitySearch('重庆')" class="city-btn">&#xf041; 重庆</a>
+            <a href="#" onclick="goToCitySearch('石家庄')" class="city-btn">&#xf041; 石家庄</a>
+            <a href="#" onclick="goToCitySearch('大理')" class="city-btn">&#xf041; 大理</a>
+            <a href="#" onclick="goToCitySearch('扬州')" class="city-btn">&#xf041; 扬州</a>
+            <a href="#" onclick="goToCitySearch('福州')" class="city-btn">&#xf041; 福州</a>
+            <a href="#" onclick="goToCitySearch('西安')" class="city-btn">&#xf041; 西安</a>
+            <a href="#" onclick="goToCitySearch('西宁')" class="city-btn">&#xf041; 西宁</a>
+            <a href="#" onclick="goToCitySearch('兰州')" class="city-btn">&#xf041; 兰州</a>
+            <a href="#" onclick="goToCitySearch('长沙')" class="city-btn">&#xf041; 长沙</a>
+            <a href="#" onclick="goToCitySearch('郑州')" class="city-btn">&#xf041; 郑州</a>
+        </div>
+    </center>
+</body>
+
+<script>
+    var oInp = document.getElementById('inp');
+    var oBtn = document.getElementById('btn');
+
+    oBtn.onclick = function () {
+        Search();
+    }
+
+    document.onkeydown = function () {
+        if (event.keyCode == 13) {
+            Search();
+        }
+    }
+
+    function Search() {
+        var url = 'https://www.baidu.com/s?wd=' + oInp.value;
+        window.open(url);
+    }
+</script>
